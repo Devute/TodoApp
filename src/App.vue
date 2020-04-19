@@ -1,15 +1,16 @@
 <template>
   <v-app>
-    <todo />
+    <router-view></router-view>
+    <Notification />
   </v-app>
 </template>
 
 <script>
-import Todo from "./components/Todo";
+import Notification from "./components/Notification";
 export default {
   name: "App",
   components: {
-    Todo
+    Notification
   }
 };
 </script>

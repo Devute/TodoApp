@@ -54,7 +54,7 @@
           <v-divider light></v-divider>
 
           <v-card-actions>
-            <v-btn rounded dark color="black" pa-5>Sign in</v-btn>
+            <v-btn to="/login" rounded dark color="black" pa-5>Login</v-btn>
             <v-spacer></v-spacer>
             <v-btn rounded dark color="success">
               Register

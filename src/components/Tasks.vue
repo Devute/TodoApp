@@ -1,157 +1,66 @@
 <template>
-  <v-card style="width:100%; height:100%;  overflow:hidden !important">
-    <v-toolbar color="blue" dark>
-      <v-card-title>Your Lists</v-card-title>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>search</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <v-card-text style="height: calc(100% - 128px); overflow-y: scroll !important">
-      <div>
-        <v-list two-line v-bind:key="key" v-for="(task, key) in tasks">
-          <Task :task="task" />
-        </v-list>
+  <fragment>
+    <v-flex lg6 pl-2 pr-2>
+      <div style="height:100%;">
+        <v-card style="width:100%; height:100%;  overflow:hidden !important">
+          <v-toolbar color="blue" dark>
+            <v-card-title>{{listTitle.title}}</v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn icon>
+              <v-icon>search</v-icon>
+            </v-btn>
+          </v-toolbar>
+          <v-card-text style="height: calc(100% - 128px); overflow-y: scroll !important">
+            <div>
+              <v-list two-line v-bind:key="task.id" v-for="task in TASKS">
+                <TaskComponent :task="task" />
+              </v-list>
+            </div>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-layout>
+              <v-flex>
+                <NewTask />
+              </v-flex>
+            </v-layout>
+          </v-card-actions>
+        </v-card>
+        <NotesModal />
       </div>
-    </v-card-text>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-layout>
-        <v-flex>
-          <NewTask />
-        </v-flex>
-      </v-layout>
-    </v-card-actions>
-  </v-card>
+    </v-flex>
+    <v-flex lg3 pl-2>
+      <Options />
+    </v-flex>
+  </fragment>
 </template>
 
 <script>
-import Task from "./Task";
+import { Todo, Task } from "@/stores/classes/TodoData/TodoData";
+
+import TaskComponent from "./Task";
 import NewTask from "./NewTask";
+import Options from "./Options";
+import NotesModal from "./notesModal";
+
 export default {
   name: "Tasks",
   components: {
-    Task,
-    NewTask
+    TaskComponent,
+    NewTask,
+    NotesModal,
+    Options
   },
-  data: () => ({
-    tasks: [
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: false
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: false
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: false
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      },
-      {
-        id: 1,
-        title: "tasks title",
-        subTitle: "this is a subtitle",
-        isComplete: true
-      }
-    ]
-  })
+  computed: {
+    listTitle() {
+      return Todo.find(this.$route.params.id);
+    },
+    TASKS() {
+      return Task.query()
+        .where("todo_id", this.$route.params.id)
+        .get();
+    }
+  }
 };
 </script>
 

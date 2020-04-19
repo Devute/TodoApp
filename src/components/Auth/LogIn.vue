@@ -12,9 +12,9 @@
           </v-card-text>
           <v-divider light></v-divider>
           <v-card-actions>
-            <v-btn rounded dark color="indigo">Sign Up</v-btn>
+            <v-btn to="/signup" rounded dark color="indigo">Sign Up</v-btn>
             <v-spacer></v-spacer>
-            <v-btn rounded dark color="primary">
+            <v-btn to="/" rounded dark color="primary">
               Login
               <v-icon>keyboard_arrow_right</v-icon>
             </v-btn>
