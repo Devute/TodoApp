@@ -1,4 +1,4 @@
-# practice
+# Todo App
 
 ## Project setup
 ```
