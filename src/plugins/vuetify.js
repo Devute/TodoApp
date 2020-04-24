@@ -8,8 +8,8 @@ Vue.use(Vuetify);
 
 const opts = {
   icons: {
-    iconfont: "md" // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
-  }
+    iconfont: "md", // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+  },
 };
 
 export default new Vuetify(opts);
